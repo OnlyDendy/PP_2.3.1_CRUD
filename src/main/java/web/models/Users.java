@@ -1,13 +1,12 @@
 package web.models;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
-@Component
+@Entity
 @Table(name = "users")
 public class Users {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "first_name")
@@ -26,8 +25,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(long id, String name, String lastname, long age, String email, String password, String roles) {
-        this.id = id;
+    public Users(String name, String lastname, long age, String email, String password, String roles) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;

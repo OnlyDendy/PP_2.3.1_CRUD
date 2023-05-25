@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @PropertySource("classpath:hibernate_db.properties")
 @EnableTransactionManagement
@@ -33,6 +34,15 @@ public class HibernateConfig {
         dataSource.setPassword(environment.getRequiredProperty("db.password"));
 
         return dataSource;
+    }
+
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+
+        return properties;
     }
 
 
