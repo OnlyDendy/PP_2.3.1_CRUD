@@ -6,12 +6,13 @@ import java.util.List;
 
 public interface UserDao {
 
-    public List<Users> index(); //Показать всех
+    List<Users> index(); //Показать всех
 
-    public Users show(long id); // Показать каждого по указателю лкм
+    Users show(long id); // Показать каждого по указателю лкм
 
-    public void save(Users users); // создать нового
+    void save(Users users); // создать нового
 
-    public void update(long id,Users updateUsers); // редактировать человека
-    public void delete(long id); // удалить
+    void update(long id, Users updateUsers); // редактировать человека
+
+    void delete(long id); // удалить
 }
