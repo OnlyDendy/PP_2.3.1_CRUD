@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @PropertySource("classpath:hibernate_db.properties")
 @EnableTransactionManagement
-@ComponentScan("web")
+@ComponentScan(value = "web")
 @Configuration
 public class HibernateConfig {
 
@@ -55,7 +55,7 @@ public class HibernateConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("web.models");
+        em.setPackagesToScan("web");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

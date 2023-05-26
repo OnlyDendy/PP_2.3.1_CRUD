@@ -1,4 +1,4 @@
-package web.service;
+package web.dao;
 
 import web.models.Users;
 
@@ -12,6 +12,6 @@ public interface UserDao {
 
     public void save(Users users); // создать нового
 
-    public void update(int id, Users updateUsers); // редактировать человека
-    public void delete(int id); // удалить
+    public void update(long id,Users updateUsers); // редактировать человека
+    public void delete(long id); // удалить
 }

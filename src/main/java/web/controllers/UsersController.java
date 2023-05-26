@@ -5,30 +5,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.models.Users;
-import web.service.UserDao;
-import web.service.UserDaoImpl;
+import web.service.UserService;
 
 @Controller
 @RequestMapping("/people")
 public class UsersController {
 
-    private final UserDao userDAO;
+    private final UserService userService;
 
     @Autowired
-    public UsersController(UserDaoImpl userDAO) {
-        this.userDAO = userDAO;
+    public UsersController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping()
     public String UserIndex(Model model) {
 
-        model.addAttribute("people", userDAO.index());
+        model.addAttribute("people", userService.index());
         return "people/allUsers";
     }
 
     @GetMapping("/{id}")
     public String showUsers(@PathVariable("id") int id, Model model) {
-        model.addAttribute("users", userDAO.show(id));
+        model.addAttribute("users", userService.show(id));
         return "people/show";
     }
 
@@ -39,25 +38,25 @@ public class UsersController {
 
     @PostMapping
     public String createUser(@ModelAttribute("users") Users users) {
-        userDAO.save(users);
+        userService.save(users);
         return "redirect:/people";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("users", userDAO.show(id));
+    public String edit(Model model, @PathVariable("id") long id) {
+        model.addAttribute("users", userService.show(id));
         return "people/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("users") Users users, @PathVariable("id") int id) {
-        userDAO.update(id, users);
+    public String update(@ModelAttribute("users") Users users, @PathVariable("id") long id) {
+        userService.update(id,users);
         return "redirect:/people";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        userDAO.delete(id);
+    public String delete(@PathVariable("id") long id) {
+        userService.delete(id);
         return "redirect:/people";
     }
 }
