@@ -14,9 +14,6 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public UserDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public List<Users> index() {
@@ -33,8 +30,7 @@ public class UserDaoImpl implements UserDao {
     public void save(Users users) {
         entityManager.persist(users);
     }
-
-
+    
     @Override
     public void update(long id,Users updateUsers) {
         entityManager.merge(updateUsers);

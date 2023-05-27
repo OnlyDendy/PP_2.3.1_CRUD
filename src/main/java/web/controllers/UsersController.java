@@ -20,7 +20,6 @@ public class UsersController {
 
     @GetMapping()
     public String UserIndex(Model model) {
-
         model.addAttribute("people", userService.index());
         return "people/allUsers";
     }
